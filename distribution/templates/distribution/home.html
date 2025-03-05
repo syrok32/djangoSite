@@ -1,0 +1,24 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Главная страница</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2>Главная страница</h2>
+
+        <div class="mt-4">
+            <h3>Статистика рассылок:</h3>
+            <ul>
+                <li>Общее количество рассылок: {{ total_distributions }}</li>
+                <li>Количество активных рассылок: {{ active_distributions }}</li>
+                <li>Количество уникальных получателей: {{ unique_recipients }}</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
