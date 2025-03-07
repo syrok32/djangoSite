@@ -1,0 +1,24 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Удаление рассылки</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+</head>
+<body>
+<div class="container mt-4">
+    <h2 class="text-danger">Вы уверены, что хотите удалить рассылку?</h2>
+    <p><strong>ID:</strong> {{ distribution.id }}</p>
+    <p><strong>Время начала:</strong> {{ distribution.start_time }}</p>
+    <p><strong>Время окончания:</strong> {{ distribution.end_time }}</p>
+
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Удалить</button>
+        <a href="{% url 'distribution:distribution_list' %}" class="btn btn-secondary">Отмена</a>
+    </form>
+</div>
+</body>
+</html>
