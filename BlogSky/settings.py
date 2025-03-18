@@ -15,6 +15,8 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+from dotenv import load_dotenv
+import os
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
@@ -26,7 +28,7 @@ SECRET_KEY = 'django-insecure-wt7u0$g@jazm3qk$ek1o*6fa6re4hind4bz#_(66t8=vc$(sm2
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
+load_dotenv()
 
 # Application definition
 
@@ -75,21 +77,20 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'BlogSky.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'Blogsky',
-        'USER': 'postgres',
-        'PASSWORD': '202054',
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'ENGINE': os.getenv('DB_ENGINE'),
+        'NAME': os.getenv('DB_NAME'),
+        'USER': os.getenv('DB_USER'),
+        'PASSWORD': os.getenv('DB_PASSWORD'),
+        'HOST': os.getenv('DB_HOST'),
+        'PORT': os.getenv('DB_PORT'),
     }
 }
+
 AUTH_USER_MODEL = "user.CustomUser"
 
 # Password validation
@@ -110,7 +111,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
 
@@ -124,7 +124,6 @@ USE_TZ = True
 LOGIN_REDIRECT_URL = '/distribution'
 LOGOUT_REDIRECT_URL = '/user/login'
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
@@ -135,20 +134,22 @@ STATICFILES_DIRS = [
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
+
+
 LOGIN_URL = 'user:login'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_USE_SSL = False
-EMAIL_HOST_USER = 'stepstepan2@gmail.com'
-EMAIL_HOST_PASSWORD = 'jlxv xagm ewen qfjv'
-DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+EMAIL_BACKEND = os.getenv('EMAIL_BACKEND')
+EMAIL_HOST = os.getenv('EMAIL_HOST')
+EMAIL_PORT = int(os.getenv('EMAIL_PORT', 587))  # Конвертация в число
+EMAIL_USE_TLS = os.getenv('EMAIL_USE_TLS')  # Булево значение
+EMAIL_USE_SSL = os.getenv('EMAIL_USE_SSL')  # Булево значение
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
+DEFAULT_FROM_EMAIL = os.getenv('DEFAULT_FROM_EMAIL')
 
 CACHES = {
     'default': {
-        'BACKEND': 'django.core.cache.backends.redis.RedisCache',
-        'LOCATION': 'redis://127.0.0.1:6379/1',
+        'BACKEND': os.getenv('REDIS_BACKEND', 'django.core.cache.backends.redis.RedisCache'),
+        'LOCATION': os.getenv('REDIS_LOCATION', 'redis://127.0.0.1:6379/1'),
     }
 }

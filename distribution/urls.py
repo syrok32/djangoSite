@@ -1,7 +1,6 @@
 from django.urls import path
 
-from .views import DistributionListView, DistributionDetailView, DistributionCreateView, DistributionDeleteView, \
-    DistributionSendView, HomeView
+from .views import DistributionListView, DistributionDetailView, DistributionCreateView, DistributionDeleteView,DistributionSendView, HomeView
 
 app_name = "distribution"
 
@@ -11,5 +10,5 @@ urlpatterns = [
     path('create', DistributionCreateView.as_view(), name='distribution_create'),
     path('delete/<int:pk>', DistributionDeleteView.as_view(), name='distribution_delete'),
     path('send/<int:pk>/', DistributionSendView.as_view(), name='distribution_send'),
-    path('home', HomeView.as_view(), name='home')
+    path('', HomeView.as_view(), name='home')
 ]

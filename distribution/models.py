@@ -1,6 +1,6 @@
 from django.db import models
 
-import user
+
 from message.models import Message
 from newsletter_recipient.models import Newsletter
 from user.models import CustomUser
@@ -29,11 +29,11 @@ class Distribution(models.Model):
                 send_mail(
                     self.message_distribution.subject,
                     self.message_distribution.body,
-                    'from@example.com',  # Отправитель
+                    'stepstepan2@gmail.com',  # Отправитель
                     [recipient.email],
                     fail_silently=False,
                 )
-            self.status = 'start'  # Обновляем статус
+            self.state = 'start'  # Обновляем статус
             self.save()
             return "Рассылка успешно отправлена"
         except Exception as e:
