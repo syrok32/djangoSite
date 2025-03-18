@@ -1,9 +1,8 @@
 from django.contrib.auth import views as auth_views
 from django.urls import path
 
-from .views import RegisterView, verify_email, CustomLoginView, CustomLogoutView, UserListView, BlockUserView, \
-    StopDistributionView
-
+from .views import RegisterView, verify_email, CustomLoginView, CustomLogoutView, UserListView, BlockUserView, StopDistributionView
+app_name = 'user'
 urlpatterns = [
     path('register/', RegisterView.as_view(), name='register'),
     path('verify/<uidb64>/<token>/', verify_email, name='verify_email'),

@@ -23,8 +23,8 @@
                         </form>
                     </li>
                 {% else %}
-                    <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">🔑 Вход</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{% url 'register' %}">✍️ Регистрация</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'user:login' %}">🔑 Вход</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'user:register' %}">✍️ Регистрация</a></li>
                 {% endif %}
             </ul>
         </div>
