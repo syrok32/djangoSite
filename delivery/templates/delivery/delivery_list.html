@@ -1,39 +1,48 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Детали рассылки</title>
-    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
-</head>
-<body>
-<div class="container mt-5">
-    <h2>Список попыток рассылки</h2>
-    <table class="table">
-        <thead>
-        <tr>
-            <th>#</th>
-            <th>Дата и время попытки</th>
-            <th>Статус</th>
-            <th>Ответ</th>
-            <th>Рассылка</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for attempt in attempts %}
-            <tr>
-                <td>{{ attempt.id }}</td>
-                <td>{{ attempt.attempt_time }}</td>
-                <td>{{ attempt.get_status_display }}</td>
-                <td>{{ attempt.response }}</td>
-                <td>{{ attempt.distribution }}</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+{% extends 'user/base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h3 class="mb-4">Список попыток рассылки</h3>
+
+    {% if delivery_attempts %}
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover">
+                <thead class="table-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>Рассылка</th>
+                        <th>Время</th>
+                        <th>Статус</th>
+                        <th>Ответ сервера</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for attempt in delivery_attempts %}
+                        <tr>
+                            <td>{{ attempt.id }}</td>
+                            <td>
+                                <a href="{% url 'distribution:distribution_detail' attempt.distribution.id %}" class="text-decoration-none">
+                                    Рассылка #{{ attempt.distribution.id }}
+                                </a>
+                            </td>
+                            <td>{{ attempt.attempt_time|date:"d.m.Y H:i" }}</td>
+                            <td>
+                                {% if attempt.status == "success" %}
+                                    <span class="badge bg-success">{{ attempt.get_status_display }}</span>
+                                {% else %}
+                                    <span class="badge bg-danger">{{ attempt.get_status_display }}</span>
+                                {% endif %}
+                            </td>
+                            <td>{{ attempt.response }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% else %}
+        <div class="alert alert-warning" role="alert">
+            <p>Попытки рассылки отсутствуют.</p>
+        </div>
+    {% endif %}
 </div>
-</body>
-</html>
-
-
+{% endblock %}
