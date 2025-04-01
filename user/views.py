@@ -64,10 +64,6 @@ class RegisterView(CreateView):
 
         return response
 
-    def dispatch(self, request, *args, **kwargs):
-        if not request.user.groups.filter(name='Managers').exists():
-            return HttpResponseForbidden("У вас нет прав для регистрации пользователей.")
-        return super().dispatch(request, *args, **kwargs)
 
 
 class UserListView(LoginRequiredMixin, ListView):

@@ -7,6 +7,7 @@ class CustomUser(AbstractUser):
     country = CountryField(blank=True)
     phone_number = models.CharField(max_length=15, blank=True, null=True)
     email = models.EmailField(unique=True)
+    avatar = models.ImageField(upload_to='avatars/', blank=True, null=True, verbose_name='foto')
     is_blocked = models.BooleanField(default=False)
     is_email_verified = models.BooleanField(default=False)
 
