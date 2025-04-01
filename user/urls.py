@@ -1,7 +1,9 @@
 from django.contrib.auth import views as auth_views
 from django.urls import path
 
-from .views import RegisterView, verify_email, CustomLoginView, CustomLogoutView, UserListView, BlockUserView, StopDistributionView
+from .views import RegisterView, verify_email, CustomLoginView, CustomLogoutView, UserListView, BlockUserView, \
+    StopDistributionView, ProfileEditView, ProfileView
+
 app_name = 'user'
 urlpatterns = [
     path('register/', RegisterView.as_view(), name='register'),
@@ -15,5 +17,7 @@ urlpatterns = [
     path('users/', UserListView.as_view(), name='user_list'),
     path('block_user/<int:user_id>/', BlockUserView.as_view(), name='block_user'),
     path('stop_distribution/<int:pk>/', StopDistributionView.as_view(), name='stop_distribution'),
+    path('profile/', ProfileView.as_view(), name='profile_view'),
+    path('profile/edit/', ProfileEditView.as_view(), name='profile_edit'),
 
 ]

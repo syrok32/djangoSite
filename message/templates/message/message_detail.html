@@ -1,0 +1,11 @@
+{% extends "user/base.html" %}
+{% block content %}
+<h2>Детали сообщения</h2>
+<p><strong>Тема:</strong> {{ message.theme }}</p>
+<p><strong>Тело письма:</strong></p>
+<p>{{ message.body }}</p>
+
+<a href="{% url 'message_edit' message.pk %}" class="btn btn-primary">Редактировать</a>
+<a href="{% url 'message_delete' message.pk %}" class="btn btn-danger">Удалить</a>
+<a href="{% url 'message_list' %}" class="btn btn-secondary">Назад</a>
+{% endblock %}

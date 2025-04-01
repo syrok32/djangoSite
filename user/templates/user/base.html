@@ -9,15 +9,24 @@
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
-        <a class="navbar-brand" href="{% url "distribution:home" %}">BlogSky</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <a class="navbar-brand" href="{% url "home" %}">BlogSky</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarNav">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ms-auto">
+            <ul class="navbar-nav me-auto">
                 {% if user.is_authenticated %}
+                    <li class="nav-item"><a class="nav-link" href="{% url 'newsletter_list' %}">📩 Получатели</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'message_list' %}">✉️ Сообщения</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'distribution:distribution_list' %}">📢 Рассылки</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'delivery_attempt_list' %}">📢 Попытки рассылки</a></li>
+                </ul>
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="{% url 'user:profile_view' %}">👤 Мой профиль</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'user:profile_edit' %}">✏️ Редактировать профиль</a></li>
                     <li class="nav-item">
-                        <form action="{% url 'logout' %}" method="post" class="d-inline">
+                        <form action="{% url 'user:logout' %}" method="post" class="d-inline">
                             {% csrf_token %}
                             <button type="submit" class="nav-link btn btn-link">🚪 Выйти</button>
                         </form>

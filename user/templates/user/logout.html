@@ -4,13 +4,13 @@
 {% block content %}
 <div class="card shadow-sm mx-auto p-4" style="max-width: 400px;">
     <h2 class="text-center mb-4">Выход</h2>
-    <form method="post">
-        {% csrf_token %}
-        <p class="text-center">Вы уверены, что хотите выйти?</p>
-        <div class="d-grid gap-2">
-            <button type="submit" class="btn btn-danger">Выйти</button>
-            <a href="{% url 'distribution:home' %}" class="btn btn-secondary">Отмена</a>
-        </div>
-    </form>
+    <form method="post" action="{% url 'user:logout' %}">
+    {% csrf_token %}
+    <p class="text-center">Вы уверены, что хотите выйти?</p>
+    <div class="d-grid gap-2">
+        <button type="submit" class="btn btn-danger">Выйти</button>
+        <a href="{% url 'distribution:home' %}" class="btn btn-secondary">Отмена</a>
+    </div>
+</form>
 </div>
 {% endblock %}

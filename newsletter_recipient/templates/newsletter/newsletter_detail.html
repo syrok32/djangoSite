@@ -1,0 +1,13 @@
+{% extends "user/base.html" %}
+{% block content %}
+<h2>Детали подписчика</h2>
+<p><strong>Email:</strong> {{ newsletter.email }}</p>
+<p><strong>Имя:</strong> {{ newsletter.name }}</p>
+<p><strong>Фамилия:</strong> {{ newsletter.surname }}</p>
+<p><strong>Отчество:</strong> {{ newsletter.patronymic }}</p>
+<p><strong>Комментарий:</strong> {{ newsletter.comment }}</p>
+
+<a href="{% url 'newsletter_edit' newsletter.pk %}" class="btn btn-primary">Редактировать</a>
+<a href="{% url 'newsletter_delete' newsletter.pk %}" class="btn btn-danger">Удалить</a>
+<a href="{% url 'newsletter_list' %}" class="btn btn-secondary">Назад</a>
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends "user/base.html" %}
+{% block content %}
+<h2>📩 Получатели рассылки</h2>
+<a href="{% url 'newsletter_create' %}" class="btn btn-success mb-3">➕ Добавить получателя</a>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Email</th>
+            <th>Имя</th>
+            <th>Действия</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for newsletter in object_list %}
+        <tr>
+            <td>{{ newsletter.email }}</td>
+            <td>{{ newsletter.name }}</td>
+            <td>
+                <a href="{% url 'newsletter_detail' newsletter.pk %}" class="btn btn-info btn-sm">👁️</a>
+                <a href="{% url 'newsletter_edit' newsletter.pk %}" class="btn btn-primary btn-sm">✏️</a>
+                <a href="{% url 'newsletter_delete' newsletter.pk %}" class="btn btn-danger btn-sm">🗑️</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

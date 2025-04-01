@@ -1,0 +1,25 @@
+{% extends "user/base.html" %}
+{% block content %}
+<h2>✉️ Сообщения</h2>
+<a href="{% url 'message_create' %}" class="btn btn-success mb-3">➕ Создать сообщение</a>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Тема</th>
+            <th>Действия</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for message in object_list %}
+        <tr>
+            <td>{{ message.theme }}</td>
+            <td>
+                <a href="{% url 'message_detail' message.pk %}" class="btn btn-info btn-sm">👁️</a>
+                <a href="{% url 'message_edit' message.pk %}" class="btn btn-primary btn-sm">✏️</a>
+                <a href="{% url 'message_delete' message.pk %}" class="btn btn-danger btn-sm">🗑️</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
